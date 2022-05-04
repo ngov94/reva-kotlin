@@ -1,9 +1,6 @@
 package W2D3
 
-import java.text.DateFormat
-import java.text.SimpleDateFormat
 import java.time.LocalDate
-import java.util.Date
 
 fun main(){
     //Functions
@@ -20,10 +17,10 @@ fun main(){
 //        return num.toString()
 //    }
     //sum function
-    var a = 1
-    var b = 2
-    var c = 3
-    var d = 4
+    val a = 1
+    val b = 2
+    val c = 3
+    val d = 4
     println(sum(a,b))
     println(sum(b,a))
     println(sum(c,d))
@@ -37,6 +34,10 @@ fun main(){
         insertStudentDetails(studentDetailName.get(i),i+1000,gradeArray.get(i), ageArray.get(i), LocalDate.parse(dobArray.get(i)))
         println()
     }
+
+    //new student
+    insertStudentDetails("Adam",1003,'C', 25, LocalDate.parse("1996-05-03"))
+
 }
     //  2 categories
     //1. Standard Library functions - print, toString, readln, sqrt, toInt, rem
