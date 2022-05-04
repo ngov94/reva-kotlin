@@ -17,6 +17,7 @@ fun main(){
 //        return num.toString()
 //    }
     //sum function
+    println("\t---function sum and mul----")
     val a = 1
     val b = 2
     val c = 3
@@ -26,17 +27,61 @@ fun main(){
     println(sum(c,d))
     println(mul(b,d))
 
+
+    println("\t---function insertStudent---")
     var studentDetailName = arrayOf("Sam", "Bryan", "Mike")
     var gradeArray = arrayOf('A', 'B', 'C')
     var ageArray = arrayOf(21,34,22)
     var dobArray = arrayOf("2001-05-04", "1988-01-03", "2000-06-15")
-    for (i in 0..studentDetailName.size-1){
-        insertStudentDetails(studentDetailName.get(i),i+1000,gradeArray.get(i), ageArray.get(i), LocalDate.parse(dobArray.get(i)))
-        println()
+    for (i in 0..studentDetailName.lastIndex){
+        insertStudentDetails(studentDetailName.get(i),i+1000, LocalDate.parse(dobArray.get(i)), gradeArray.get(i), ageArray.get(i))
     }
 
     //new student
-    insertStudentDetails("Adam",1003,'C', 25, LocalDate.parse("1996-05-03"))
+    insertStudentDetails(name="Adam",id=1003,dob=LocalDate.parse("1996-05-03"),age=25, address = "Home")
+
+    //1. Default Arguments
+    //is an argument that can assign a value to an argument, if there is no argument passed
+    //keep the default towards the end otherwise it will create problems
+    //2. Named Arguments
+    // can use named arguments that match the function signature, so you don't have to follow an order
+        //can not mix named and unnamed arguments
+
+    println("----Lambda Function----")
+    //1. Lambda Expression
+    //functions that can be passed as arguments
+    //writing a function as a expression
+    //lambda signature
+        //val name: date_type = {arg_list -> //code block}
+    //lambda cannot be overriden (so no point in changing to var)
+    //lamba returns the last statement
+    //why use it? inline coding and brevity of coding
+        //in the context of the class/object
+        //lambda doesn't care about `this`
+    val myop = {println("My simple lambda function")}
+    myop()
+    //to replace the sum fun
+    val sum1 = {a:Int, b:Int ->
+        val num = 7
+        (a+b)*num
+    }
+    val sum2 = {a:Int, b:Int, c:Int -> println(a+b+c) }
+
+    val sum3: (Int,Int) -> String = {a, b ->
+        val num = 7
+        "Sum is "+((a+b)*num)
+
+    }
+    println(sum1(2,4))
+    sum2(2,4,23)
+    println(sum3(3,5))
+    //->: arrow function
+    //2. Anonymous functions
+    //a function that doesn't have a function name, just the body
+
+    //Inline Functions
+    //Higher Order Functions
+    //Extension Function
 
 }
     //  2 categories
@@ -53,12 +98,14 @@ fun mul(a: Int, b: Int): Int{
     return a*b
 }
 
-fun insertStudentDetails(name: String, id: Int, grade: Char, age: Int, dob: LocalDate): Boolean{
+fun insertStudentDetails(name: String, id: Int, dob: LocalDate, grade: Char = 'D', age: Int = 20, address: String = "My School"): Boolean{
     println("Student Name: $name")
     println("Student ID: $id")
     println("Grade: $grade")
     println("Age: $age")
     println("DOB: $dob")
+    println("Address: $address")
+    println()
 
     return true
 }
