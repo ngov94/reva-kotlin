@@ -53,8 +53,9 @@ fun main(){
     //writing a function as a expression
     //lambda signature
         //val name: date_type = {arg_list -> //code block}
+        //-> arrow function
     //lambda cannot be overriden (so no point in changing to var)
-    //lamba returns the last statement
+    //lamba returns the last statement...can also use return
     //why use it? inline coding and brevity of coding
         //in the context of the class/object
         //lambda doesn't care about `this`
@@ -75,15 +76,39 @@ fun main(){
     println(sum1(2,4))
     sum2(2,4,23)
     println(sum3(3,5))
-    //->: arrow function
+
+
+
+    println("\n\n----Anonymous Function----")
     //2. Anonymous functions
     //a function that doesn't have a function name, just the body
+    //syntax
+        //fun(argName: argType,...): returnType {}
+            //OR
+        //fun(argName: argType,...): returnType =
+    //to call the function treat them like expressions
+
+    println(anon1(3,6))
+
+    //DIFFERENCE b/w lambda and anonymous
+        //anon is returning value inside the function and pretty much similar to function
+            //can pass function as a parameter
+        //lambda is return belongs to the val
+
 
     //Inline Functions
     //Higher Order Functions
     //Extension Function
 
 }
+//anonymous functions
+val anon1 = fun(a: Int, b: Int): Int = a*b      //equivalient to mul
+val anon2 = fun(a: Int, b: Int): Int {
+    val mul = a*b
+    return mul
+}
+
+
     //  2 categories
     //1. Standard Library functions - print, toString, readln, sqrt, toInt, rem
     //2. User Defined Function - e.g. sum (below)
