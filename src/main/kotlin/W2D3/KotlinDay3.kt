@@ -96,7 +96,7 @@ fun main(){
             //return belongs to the function
         //lambda is return belongs to the calling function that is calling lambda
 
-
+    println("\n\n----Inline Function----")
     //Inline Functions
         //inline fun higherSum(a: Int, b:Int){}
         //see below
@@ -111,7 +111,7 @@ fun main(){
         })
 //    println()
 //    lambInline({ println("Hi I'm 1")
-//    return},{println("Hi I'm 2")
+//    return},{println("Hi I'm 2")      //return exits out of main
 //    })
 //    println()
 //    lambInline({ println("Hi I'm 1")
@@ -121,8 +121,16 @@ fun main(){
     23},{println("Hi I'm 2")
     543})
 
+    println("\n\n----Higher Order Function----")
     //Higher Order Functions
-        //
+        //a function that takes another function as arg and returns another function
+    hofun(lmb)
+
+    //Step 3
+    var sub = hofSub()
+    //Step 4
+    println(sub(45,23))
+
 
 }
 //anonymous functions
@@ -139,7 +147,7 @@ inline fun higherSum(a: Int, b:Int): Int{ //here it says it is insignificant
     return a+ b
 }
 
-inline fun lambInline(lam1: () -> Unit, lam2: () -> Unit) {     //Unit == void
+inline fun lambInline(lam1: () -> Unit, lam2: () -> Unit) {     //Unit is like void
     println(lam1())
     println(lam2())
     println("blahblah")
@@ -150,6 +158,25 @@ inline fun lambInline2(lam1: () -> Int, lam2: () -> Int) {     //Unit == void
     println(lam1())
     println(lam2())
     println("blahblah")
+}
+
+//higher order function
+
+var lmb = { a:Int, b:Int -> a*b }
+fun hofun(lmb: (Int, Int) -> Int){
+    var r = lmb(2,5)
+    println("my result: $r")
+}
+
+//Step 1
+fun subtraction( a:Int, b:Int): Int{
+    var s = a-b
+    return s
+}
+
+//Step 2
+fun hofSub(): ((Int, Int) -> Int){
+    return ::subtraction        //:: call ordinary function and map with lambda
 }
 
 
