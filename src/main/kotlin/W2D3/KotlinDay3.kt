@@ -1,6 +1,7 @@
 package W2D3
 
 import java.time.LocalDate
+import kotlin.math.abs
 
 fun main(){
     //Functions
@@ -92,13 +93,36 @@ fun main(){
 
     //DIFFERENCE b/w lambda and anonymous
         //anon is returning value inside the function and pretty much similar to function
-            //can pass function as a parameter
-        //lambda is return belongs to the val
+            //return belongs to the function
+        //lambda is return belongs to the calling function that is calling lambda
 
 
     //Inline Functions
+        //inline fun higherSum(a: Int, b:Int){}
+        //see below
+        //if you call function in main it will not allocaate separate memory
+        //in compile code you wont have the whole function, it would be substituted with the value
+        //saving memory
+        //works better with parameters of functional type
+    higherSum(2,7)
+    //2+7 <---what is seen in the compile code
+    lambInline({ println("Hi I'm 1")
+        },{println("Hi I'm 2")
+        })
+//    println()
+//    lambInline({ println("Hi I'm 1")
+//    return},{println("Hi I'm 2")
+//    })
+//    println()
+//    lambInline({ println("Hi I'm 1")
+//    },{println("Hi I'm 2")
+//    return})
+    lambInline2({ println("Hi I'm 1")
+    23},{println("Hi I'm 2")
+    543})
+
     //Higher Order Functions
-    //Extension Function
+        //
 
 }
 //anonymous functions
@@ -106,6 +130,26 @@ val anon1 = fun(a: Int, b: Int): Int = a*b      //equivalient to mul
 val anon2 = fun(a: Int, b: Int): Int {
     val mul = a*b
     return mul
+}
+//lambda
+val lamb1 = {a: Int, b: Int -> a*b}
+
+//inline functions
+inline fun higherSum(a: Int, b:Int): Int{ //here it says it is insignificant
+    return a+ b
+}
+
+inline fun lambInline(lam1: () -> Unit, lam2: () -> Unit) {     //Unit == void
+    println(lam1())
+    println(lam2())
+    println("blahblah")
+    //here don't need a return
+}
+
+inline fun lambInline2(lam1: () -> Int, lam2: () -> Int) {     //Unit == void
+    println(lam1())
+    println(lam2())
+    println("blahblah")
 }
 
 
@@ -122,6 +166,8 @@ fun sum (a: Int, b: Int): Int{ //signature of the function
 fun mul(a: Int, b: Int): Int{
     return a*b
 }
+
+
 
 fun insertStudentDetails(name: String, id: Int, dob: LocalDate, grade: Char = 'D', age: Int = 20, address: String = "My School"): Boolean{
     println("Student Name: $name")
