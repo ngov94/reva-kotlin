@@ -125,6 +125,7 @@ fun main(){
     //Higher Order Functions
         //a function that takes another function as arg and returns another function
     hofun(lmb)
+    hofun(::subtraction)
 
     //Step 3
     var sub = hofSub()
@@ -161,10 +162,10 @@ inline fun lambInline2(lam1: () -> Int, lam2: () -> Int) {     //Unit == void
 }
 
 //higher order function
-
+//input as a function
 var lmb = { a:Int, b:Int -> a*b }
 fun hofun(lmb: (Int, Int) -> Int){
-    var r = lmb(2,5)
+    var r = lmb(5,2)
     println("my result: $r")
 }
 
