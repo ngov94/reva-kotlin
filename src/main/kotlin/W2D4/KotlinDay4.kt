@@ -36,13 +36,28 @@ fun main(){
 //    p.myAnothername = "CHANGE2"
 //    println(p.myAnothername)
 
-    //Inheritance
-    var p = Person2()
-    println(p.getName("John is the parent"))
-    var t = Teacher()
-    //3 --> child has access/inherited the getName function from parent
-    println(t.getName("Dolly the teacher is a child of John "))
-    println(t.teachKids())
+//    //Inheritance
+//    var p = Person2()
+//    p.getName("John")
+//    var t = Teacher()
+//    //3 --> child has access/inherited the getName function from parent
+//    t.getName("Dolly")//override getName from parent class
+//    println(t.teachKids())
+
+//    //primary and secondary constructors and inheritence
+//    var ceo = CEO("Don", 234223, 120000.00)
+
+    //Visability Modifier
+    var a = A()
+    println(a.getA()) //private
+    var b = B()
+    b.display()
+
+    var b1 = BProtected()
+    println(b1.getMyProtectedValue()) //this is a public function so it can access a
+
+    var a1 = AProtect()
+//    println(a1.a)  ---> since it is protected it is only visible inside the same class
 
 }
 //OOP
@@ -159,15 +174,23 @@ class Person{
     //Every class in Kotlin is final....so need to use keyword 'open' so that it can be inherited
     //fun in the parent class can be brought in automatically to the child class
     //child can change what it got from its parents (using override)
+    //need to make functions open as well if overrriding it in child class
 //1 open class
 open class Person2{
-    fun getName(name: String):String {
-        return name
+    open fun getName(name: String) {
+        //100 lines of code
+        println("Parent "+name)
     }
 
 }
 //2 : ---> To inherit
 class Teacher():Person2(){
+    override fun getName(name:String){ //we have override function from parent
+        //wants the 100 lines + want to add some functionality on top of that
+        super.getName(name)
+        //any code here
+        println("child "+name)
+    }
 
     fun teachKids(){
         println("I am teaching kids")
@@ -179,3 +202,83 @@ class Merchant():Person2(){
         println("I am selling goods")
     }
 }
+
+open class Employee{
+    constructor(name: String, id: Int){
+        println("hi my name is : $name")
+        println("hi my ID is : $id")
+    }
+}
+
+//signature of inherited class can be different
+//primary constructor - the init in the child implicitly calls the parent then child gets called
+//secondary constructor - need to call super() in child class constructor
+class CEO:Employee{
+    constructor(name: String, id: Int,salary: Double) : super(name, id) {
+        println("My salary is: $salary")
+    }
+}
+
+
+
+//Encapsulation
+    //Class encloses properties of a class
+
+
+//Abstraction
+    //Complexities of the coden are hidden
+
+//Visibility Modifier
+//1. public (default)               -visible everywhere
+//2. private                        -visible inside the same class
+//3. protected                      -visible inside the same class ana its subclasses
+//4. internal (kotlin specific)     -visible inside the same module/package
+
+
+//when we look at packages we will understand internal better
+internal class A12{
+
+}
+
+class B12{
+    internal val i = 10
+    internal fun myfun(){
+
+    }
+}
+
+open class AProtect{
+    protected val a = 10 //protected variable
+}
+
+class BProtected:AProtect(){ //child class
+    fun getMyProtectedValue():Int{
+        return a
+    }
+}
+
+open class A{ //the private class - the scope of the class is limited this Kotlin file
+    private var a = 10//private variable - the scope is limited to inside the class
+    fun getA():Int{//encapsulation
+        return a
+    }
+}
+
+//class BPrivate: A() {
+//    fun getAPrivate(){
+//        return a
+//    }
+//}
+
+class B{//by default it is public
+    var a1:Int = 10
+    fun display(){
+        println("Display my text")
+    }
+}
+
+////Recursion - Stack, Back tracking
+//fun funA(){
+//    funA() //function calling itself
+//    //Exit condition --> to make sure you don't end up in an infinite loop
+//}
